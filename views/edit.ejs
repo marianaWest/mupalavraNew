@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo app</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+    <div class="termos-container">
+        <h1>editar termo</h1>
+        <section class="hidden">   
+            <ul class="nomes-lista">
+                <% items.forEach(content => {%>
+                    <% if(content._id == idItem) { %>
+                        <li class="nomes-lista-item">
+                            <form action="/edit/<%= content._id %>" method="POST">
+                                <input type="text" name="termo" value="<%= content.termo %>">
+                                <textarea rows="6" cols="45" name="descricao"><%= content.descricao %></textarea>
+                                <button type="submit" class="confirm">Confirmar</button>
+                                <a href="/" class="cancel">Cancelar</a>
+                            </form>
+                            </li>
+                            <% } else { %>
+                                    <li class="nomes-lista-item">
+                                        <div class="nomes-lista-item-titulo">
+                                            <%= content.termo %>
+                                        </div>
+                                        <div class="nomes-lista-item-descricao">
+                                            <%= content.descricao %>
+                                        </div>
+                                        <a href="/edit/<%= content._id %>" class="edit"><span class="fas fa-edit"></span></a>
+                                        <a href="/remove/<%= content._id %>" class="remove"><span class="fas fa-times"></span></a>
+                                    </li>
+                                    <% } %>
+                                    <% }) %>
+                                </ul>
+                            </section>
+        </section>
+</body>
+</html>
