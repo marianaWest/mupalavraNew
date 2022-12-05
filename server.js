@@ -4,6 +4,8 @@ const PORT = 2222;
 const mongoose = require("mongoose");
 require('dotenv').config();
 const TermoMupalavra = require('./models/termoSchema');
+// novo
+// const mainRoutes = require('./routes/main');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -14,18 +16,18 @@ mongoose.connect(process.env.DB_STRING,
     () => {console.log('Connected to database')});
     
     // funciona
-    app.get('/', async (req, res, next) => {
-        try {
-            TermoMupalavra.find({}, (err, info) => {
-                res.render('index.ejs', {
-                    items: info
-                })
-            })
-            } catch (error) {
-           res.status(500).send({message: error.message})
-        };
-        next();
-    })
+    // app.get('/', async (req, res, next) => {
+    //     try {
+    //         TermoMupalavra.find({}, (err, info) => {
+    //             res.render('index.ejs', {
+    //                 items: info
+    //             })
+    //         })
+    //         } catch (error) {
+    //        res.status(500).send({message: error.message})
+    //     };
+    //     next();
+    // })
 
 // funciona, mas nao as duas juntas
     app.get('/', async (req, res) => {
@@ -33,23 +35,12 @@ mongoose.connect(process.env.DB_STRING,
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
                 res.render('index.ejs', {
                     items: info
-                    // console.log(palavra)
                 })
             })
         } catch (error) {
             res.status(500).send({message: error.message})
          };
        })
- 
-    //    app.get('/', async (req, res) => {
-    //     try {
-    //         const palavra = await TermoMupalavra.aggregate([{ $sample: { size: 1 } }])
-    //         console.log(palavra)
-    //     } catch (error) {
-    //         res.status(500).send({message: error.message})
-    //      };
-    //    })
-
     
     app.post('/', async (req, res) => {
         const novoTermo = new TermoMupalavra({
@@ -101,4 +92,18 @@ app
             })
         })
 
+app
+.route('/add')
+.get((req, res) => {
+            try {
+                TermoMupalavra.find({}, (err, info) => {
+                    res.render('add.ejs', {
+                        items: info
+                    })
+                })
+                } catch (error) {
+               res.status(500).send({message: error.message})
+            }
+        })
+           
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
