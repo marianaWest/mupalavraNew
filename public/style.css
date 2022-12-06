@@ -144,3 +144,48 @@ ul {
 .hidden {
     display: none;
 }
+
+#keyboard-cont {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #keyboard-cont div {
+    display: flex;
+  }
+  
+  .second-row {
+    margin: 0.5rem 0;
+  }
+  
+  .keyboard-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.5rem;
+    margin: 0 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: white;
+    border: 2px solid rgba(0, 115, 67, 0.8);
+    color:rgb(4, 53, 32);
+    border-radius: 5px;
+  }
+
+  .mupalavra {
+    text-align: center;
+    color: rgba(4, 53, 32, 0.9);
+    font-family: 'Righteous', 'Candara';
+    font-size: 3rem;
+  }
+
+  .adicione {
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(4, 53, 32, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+  }
