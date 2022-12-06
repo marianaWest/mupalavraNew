@@ -12,10 +12,12 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 <body>
    
     <div class="termos-container">
-        <h1>adicionar termos</h1>
+        <h1>termos</h1>
         <section class="termos-container-interno">
-            <!-- change form action route -->
-            <form action="/" method="POST" class="adicionar-termo">
+            
+            <!-- <form action="/" method="POST" class="adicionar-termo"> -->
+                <!-- teste-->
+                    <form action="/add" method="POST" class="adicionar-termo"> 
                 <input type="text" name="termo" value="termo">
                 <textarea rows="6" cols="45" name="descricao">descrição</textarea>
                 <button type="submit"><span class="fas fa-plus"></span> adicione um termo</button>

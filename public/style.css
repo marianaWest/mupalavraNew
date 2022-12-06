@@ -140,3 +140,7 @@ ul {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.hidden {
+    display: none;
+}

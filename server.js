@@ -15,21 +15,7 @@ mongoose.connect(process.env.DB_STRING,
     {useNewUrlParser: true},
     () => {console.log('Connected to database')});
     
-    // funciona
-    // app.get('/', async (req, res, next) => {
-    //     try {
-    //         TermoMupalavra.find({}, (err, info) => {
-    //             res.render('index.ejs', {
-    //                 items: info
-    //             })
-    //         })
-    //         } catch (error) {
-    //        res.status(500).send({message: error.message})
-    //     };
-    //     next();
-    // })
-
-// funciona, mas nao as duas juntas
+   // root route
     app.get('/', async (req, res) => {
         try {
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
@@ -42,7 +28,8 @@ mongoose.connect(process.env.DB_STRING,
          };
        })
     
-    app.post('/', async (req, res) => {
+    //    add route
+    app.post('/add', async (req, res) => {
         const novoTermo = new TermoMupalavra({
             termo: req.body.termo,
             descricao: req.body.descricao
@@ -51,13 +38,28 @@ mongoose.connect(process.env.DB_STRING,
         try {
             await novoTermo.save()
             console.log(novoTermo)
-            res.redirect('/')
+            res.redirect('/add')
         } catch(err) {
             if (err) return res.status(500).send(err)
-            res.redirect('/')
+            res.redirect('/add')
         }
     })
 
+    app
+.route('/add')
+.get((req, res) => {
+            try {
+                TermoMupalavra.find({}, (err, info) => {
+                    res.render('add.ejs', {
+                        items: info
+                    })
+                })
+                } catch (error) {
+               res.status(500).send({message: error.message})
+            }
+        })
+
+// edit
 app
     .route("/edit/:id")
     .get((req, res) => {
@@ -78,32 +80,21 @@ app
             },
             err => {
                 if (err) return res.status(500).send(err)
-                res.redirect('/')
+                res.redirect('/add')
             })
     })
 
+    // remove
     app.
         route('/remove/:id')
         .get((req, res) => {
             const id = req.params.id
             TermoMupalavra.findByIdAndRemove(id, err => {
                 if (err) return res.status(500).send(err)
-                res.redirect('/')
+                res.redirect('/add')
             })
         })
 
-app
-.route('/add')
-.get((req, res) => {
-            try {
-                TermoMupalavra.find({}, (err, info) => {
-                    res.render('add.ejs', {
-                        items: info
-                    })
-                })
-                } catch (error) {
-               res.status(500).send({message: error.message})
-            }
-        })
+
            
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
