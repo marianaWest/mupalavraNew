@@ -20,8 +20,9 @@ mongoose.connect(process.env.DB_STRING,
         try {
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
                 res.render('index.ejs', {
-                        word: info.termo,
-                        description: info.descricao
+                    items: info
+                        // word: info.termo,
+                        // description: info.descricao
                     }
                 ) 
             }) 
