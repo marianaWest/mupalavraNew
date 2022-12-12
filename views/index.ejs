@@ -17,22 +17,23 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
     <div class="termos-container">
         <section class="termos-container-interno">
             <ul class="nomes-lista">
-                <% items.forEach(content => {%>
+               
                 <li class="nomes-lista-item">
                     <div class="nomes-lista-item-titulo">
-                        <%= content.termo %>
+                        
+                        <p><% word %></p>
+                     
                     </div>
-                    <div class="nomes-lista-item-descricao hidden">
-                        <%= content.descricao %>
+                    <div class="nomes-lista-item-descricao">
+                        
+                        <p><%= description %></p>
                     </div>
                 </li>
-                <% }) %>
             </ul>
         </section>
     </div>
    
     <div id="game-board"></div>
-
     <div id="keyboard-cont">
         <div class="first-row">
             <button class="keyboard-button">q</button>

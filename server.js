@@ -20,12 +20,14 @@ mongoose.connect(process.env.DB_STRING,
         try {
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
                 res.render('index.ejs', {
-                    items: info
-                })
-            })
+                        word: info.termo,
+                        description: info.descricao
+                    }
+                ) 
+            }) 
         } catch (error) {
             res.status(500).send({message: error.message})
-         };
+         }; 
        })
     
     //    add route
@@ -33,8 +35,8 @@ mongoose.connect(process.env.DB_STRING,
         const novoTermo = new TermoMupalavra({
             termo: req.body.termo,
             descricao: req.body.descricao
-        }    
-        )
+        } 
+        ) 
         try {
             await novoTermo.save()
             console.log(novoTermo)
@@ -42,6 +44,7 @@ mongoose.connect(process.env.DB_STRING,
         } catch(err) {
             if (err) return res.status(500).send(err)
             res.redirect('/add')
+            console.log(err)
         }
     })
 
