@@ -15,7 +15,7 @@ mongoose.connect(process.env.DB_STRING,
     {useNewUrlParser: true},
     () => {console.log('Connected to database')});
     
-   // root route
+//    root route - working
     app.get('/', async (req, res) => {
         try {
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
@@ -23,13 +23,19 @@ mongoose.connect(process.env.DB_STRING,
                     items: info
                         // word: info.termo,
                         // description: info.descricao
-                    }
-                ) 
+                    }) 
             }) 
         } catch (error) {
             res.status(500).send({message: error.message})
          }; 
        })
+
+
+
+
+       
+
+
     
     //    add route
     app.post('/add', async (req, res) => {

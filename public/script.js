@@ -1,2 +1,3 @@
 // just testing
-document.getElementById("test").innerHTML = "one more"
+
+document.getElementById("test").innerHTML = "test";

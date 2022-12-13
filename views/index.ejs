@@ -17,23 +17,29 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
     <div class="termos-container">
         <section class="termos-container-interno">
             <ul class="nomes-lista">
-               
                 <li class="nomes-lista-item">
+                    <% items.forEach(content => {%>
                     <div class="nomes-lista-item-titulo">
-                        
-                        <p><% word %></p>
-                     
+                        <% let word = content.termo %>
+                        <% let wordArray = Array.from(word) %>
+                        <p><%= wordArray %></p>
                     </div>
                     <div class="nomes-lista-item-descricao">
-                        
-                        <p><%= description %></p>
+                        <% let description = content.descricao %>
                     </div>
                 </li>
+                <% }) %>
             </ul>
         </section>
     </div>
+
+<% const NUMBER_OF_GUESSES = 6 %>
+<% let guessesRemaining = NUMBER_OF_GUESSES  %>
+<% let currentGuess = [] %>
+<% let nextLetter = 0 %>
+
+<div id="game-board"></div>
    
-    <div id="game-board"></div>
     <div id="keyboard-cont">
         <div class="first-row">
             <button class="keyboard-button">q</button>
