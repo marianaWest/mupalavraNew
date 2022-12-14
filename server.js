@@ -4,8 +4,7 @@ const PORT = 2222;
 const mongoose = require("mongoose");
 require('dotenv').config();
 const TermoMupalavra = require('./models/termoSchema');
-// novo
-// const mainRoutes = require('./routes/main');
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -21,19 +20,18 @@ mongoose.connect(process.env.DB_STRING,
             TermoMupalavra.aggregate([{ $sample: { size: 1 } }], (err, info) => {
                 res.render('index.ejs', {
                     items: info
-                        // word: info.termo,
-                        // description: info.descricao
+                    // I tried to do as you said, and export 'word' and 'description' to index from here but it didn't work
+                    // { 
+                    // word: info.termo,
+                    // description: info.descricao
+                    // }
+                        
                     }) 
             }) 
         } catch (error) {
             res.status(500).send({message: error.message})
          }; 
        })
-
-
-
-
-       
 
 
     
